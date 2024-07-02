@@ -40,6 +40,7 @@
   docker_login:
     username: '{{dockerhub_username}}'
     password: '{{dockerhub_password}}'
+    registry_url: '{{dockerhub_registry_url}}'
 
 - name: 'Setup crontab to clean up docker images'
   cron:
