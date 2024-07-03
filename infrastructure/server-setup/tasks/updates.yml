@@ -1,3 +1,39 @@
+- name: Install dependencies
+  ansible.builtin.apt:
+    name:
+      - net-tools
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      # - python3-pip
+      # - virtualenv
+      # - python3-setuptools
+      - gnupg-agent
+      - gnupg2
+      - autoconf
+      - dpkg-dev
+      - file
+      - g++
+      - gcc
+      - libc-dev
+      - make
+      - pkg-config
+      - re2c
+      - wget
+    state: present
+    update_cache: true
+
+- name: Download and add Docker GPG key
+  shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+  args:
+    warn: false
+
+- name: Add Docker APT repository
+  apt_repository:
+    repo: deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu noble stable
+    state: present
+    filename: docker
 - name: Update apt repository
   apt:
     update_cache: yes
