@@ -1,13 +1,3 @@
-- name: Add Docker GPG key
-  apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    state: present
-
-- name: Add Docker APT repository
-  apt_repository:
-    repo: deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu noble stable
-    state: present
-    filename: docker
 - name: Update apt repository
   apt:
     update_cache: yes
