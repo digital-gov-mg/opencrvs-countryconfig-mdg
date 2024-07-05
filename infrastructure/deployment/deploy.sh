@@ -159,7 +159,7 @@ validate_environment_variables() {
 }
 
 configured_rsync() {
-  rsync -e "ssh $SSH_USER@$SSH_HOST -p $SSH_PORT $SSH_ARGS" "$@"
+  rsync -e "ssh $SSH_USER@$SSH_HOST -p $SSH_PORT " "$@"
 }
 
 get_environment_variables() {
@@ -186,7 +186,7 @@ get_environment_variables() {
 }
 
 configured_ssh() {
-  ssh $SSH_USER@$SSH_HOST -p $SSH_PORT $SSH_ARGS "export $(get_environment_variables); $@"
+  ssh $SSH_USER@$SSH_HOST -p $SSH_PORT "export $(get_environment_variables); $@"
 }
 
 # Rotate MongoDB credentials
@@ -347,7 +347,7 @@ configured_rsync -rlD /tmp/docker-compose.yml /tmp/docker-compose.deps.yml $SSH_
 echo "Logging to Dockerhub"
 
 configured_ssh << EOF
-  docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN
+  docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN registry.gitlab.com
 EOF
 
 # Setup configuration files and compose file for the deployment domain
