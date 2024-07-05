@@ -159,6 +159,7 @@ validate_environment_variables() {
 }
 
 configured_rsync() {
+  echo "ssh $SSH_USER@$SSH_HOST $SSH_ARGS"
   rsync -e "ssh $SSH_USER@$SSH_HOST $SSH_ARGS" "$@"
 }
 
