@@ -186,7 +186,7 @@ get_environment_variables() {
 }
 
 configured_ssh() {
-  ssh -p $SSH_PORT "export $(get_environment_variables); $@"
+  ssh $SSH_USER@$SSH_HOST -p $SSH_PORT "export $(get_environment_variables); $@"
 }
 
 # Rotate MongoDB credentials
