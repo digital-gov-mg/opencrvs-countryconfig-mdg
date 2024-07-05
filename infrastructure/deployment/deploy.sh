@@ -159,6 +159,7 @@ validate_environment_variables() {
 }
 
 configured_rsync() {
+  echo "==> $SSH_USER@$SSH_HOST -p $SSH_PORT"
   rsync -e "ssh $SSH_USER@$SSH_HOST -p $SSH_PORT " "$@"
 }
 
