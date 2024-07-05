@@ -159,7 +159,7 @@ validate_environment_variables() {
 }
 
 configured_rsync() {
-  rsync -e "ssh $SSH_USER@$SSH_HOST -p $SSH_PORT " "$@"
+  rsync -e "ssh -p $SSH_PORT " "$@"
 }
 
 get_environment_variables() {
@@ -186,7 +186,7 @@ get_environment_variables() {
 }
 
 configured_ssh() {
-  ssh $SSH_USER@$SSH_HOST -p $SSH_PORT "export $(get_environment_variables); $@"
+  ssh -p $SSH_PORT "export $(get_environment_variables); $@"
 }
 
 # Rotate MongoDB credentials
@@ -340,7 +340,6 @@ echo
 echo "Deploying COUNTRY_CONFIG_VERSION $COUNTRY_CONFIG_VERSION to $SSH_HOST..."
 echo
 echo "Syncing configuration files to the target server"
-echo "================================"
 
 configured_rsync -rlD $PROJECT_ROOT/infrastructure $SSH_USER@$SSH_HOST:/opt/opencrvs/ --delete --no-perms --omit-dir-times --verbose
 configured_rsync -rlD /tmp/docker-compose.yml /tmp/docker-compose.deps.yml $SSH_USER@$SSH_HOST:/opt/opencrvs/infrastructure --no-perms --omit-dir-times  --verbose
